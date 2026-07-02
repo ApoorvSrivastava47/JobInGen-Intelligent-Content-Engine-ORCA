@@ -6,25 +6,21 @@ import {
 
 import "../styles/ImageCard.css";
 
-function ImageCard({ imagePath }) {
+function ImageCard({ imageUrl }) {
 
-  if (!imagePath) return null;
+  if (!imageUrl) return null;
 
-  // Railway Backend URL
   const API_URL = import.meta.env.VITE_API_URL;
 
-  // Remove starting slash if present
-  const cleanPath = imagePath.replace(/^\/+/, "");
+  const fullImageUrl = `${API_URL}${imageUrl}`;
 
-  const imageUrl = `${API_URL}/${cleanPath}`;
-
-  const filename = cleanPath.split("/").pop();
+  const filename = imageUrl.split("/").pop();
 
   function downloadImage() {
 
     const a = document.createElement("a");
 
-    a.href = imageUrl;
+    a.href = fullImageUrl;
 
     a.download = filename;
 
@@ -51,7 +47,7 @@ function ImageCard({ imagePath }) {
       <div className="image-preview">
 
         <img
-          src={imageUrl}
+          src={fullImageUrl}
           alt="Generated"
           className="generated-image"
         />
@@ -72,7 +68,7 @@ function ImageCard({ imagePath }) {
         </button>
 
         <a
-          href={imageUrl}
+          href={fullImageUrl}
           target="_blank"
           rel="noreferrer"
           className="secondary-btn"

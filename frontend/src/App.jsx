@@ -52,8 +52,8 @@ function App() {
 
             <section className="image-section">
 
-              <ImageCard imagePath={result.image_path} />
-
+              <ImageCard imageUrl={result.image_url} />
+              
             </section>
 
 
