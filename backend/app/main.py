@@ -13,7 +13,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://job-in-gen-intelligent-content-engine-orca-60yu7gt61-orc-a.vercel.app",
+        "https://job-in-gen-intelligent-content-engine-orca-nj8ciu631-orc-a.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
