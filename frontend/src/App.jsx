@@ -16,7 +16,43 @@ import "./App.css";
 
 function App() {
 
-  const [result, setResult] = useState(null);
+const [result, setResult] = useState(null);
+
+const [showStrategy,setShowStrategy]=useState(false);
+
+const [showWorkflow,setShowWorkflow]=useState(false);
+
+const [showContent,setShowContent]=useState(false);
+
+const [showImage,setShowImage]=useState(false);
+
+const [showReview,setShowReview]=useState(false);
+
+function handleResult(data){
+
+  setResult(data);
+
+  setShowStrategy(false);
+
+  setShowWorkflow(false);
+
+  setShowContent(false);
+
+  setShowImage(false);
+
+  setShowReview(false);
+
+  setTimeout(()=>setShowStrategy(true),150);
+
+  setTimeout(()=>setShowWorkflow(true),350);
+
+  setTimeout(()=>setShowContent(true),550);
+
+  setTimeout(()=>setShowImage(true),750);
+
+  setTimeout(()=>setShowReview(true),950);
+
+}
 
   return (
 
@@ -26,7 +62,7 @@ function App() {
 
       <section className="generate-section">
 
-        <TopicInput onGenerate={setResult} />
+      <TopicInput onGenerate={handleResult} />
 
       </section>
 
@@ -36,32 +72,91 @@ function App() {
 
           <>
 
-            <section className="dashboard-grid">
+           <section className="dashboard-grid">
 
-              <StrategyCard strategy={result.strategy} />
+  {
 
-              <WorkflowStatus result={result} />
+    showStrategy && (
 
-            </section>
+      <div className="reveal">
 
-            <section className="content-section">
+        <StrategyCard strategy={result.strategy}/>
 
-              <ContentCard content={result.content} />
+      </div>
 
-            </section>
+    )
 
-            <section className="image-section">
+  }
 
-              <ImageCard imageUrl={result.image_url} />
-              
-            </section>
+  {
+
+    showWorkflow && (
+
+      <div className="reveal">
+
+        <WorkflowStatus result={result}/>
+
+      </div>
+
+    )
+
+  }
+
+</section>
+
+            {
+
+showContent && (
+
+<section className="content-section">
+
+<div className="reveal">
+
+<ContentCard content={result.content}/>
+
+</div>
+
+</section>
+
+)
+
+}
+           {
+
+showImage && (
+
+<section className="image-section">
+
+<div className="reveal">
+
+<ImageCard imageUrl={result.image_url}/>
+
+</div>
+
+</section>
+
+)
+
+}
 
 
-            <section className="review-section">
+         {
 
-              <ReviewCard review={result.review} />
-              
-            </section>
+showReview && (
+
+<section className="review-section">
+
+<div className="reveal">
+
+<ReviewCard review={result.review}/>
+
+</div>
+
+</section>
+
+)
+
+}
 
 
             

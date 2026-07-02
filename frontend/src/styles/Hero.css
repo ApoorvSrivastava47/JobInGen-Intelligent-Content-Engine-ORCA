@@ -4,15 +4,15 @@ position:relative;
 
 overflow:hidden;
 
-padding:90px 60px;
+padding:clamp(50px,8vw,90px) clamp(20px,5vw,60px);
 
 border-radius:32px;
 
 background:
 linear-gradient(
 135deg,
-rgba(17,24,39,.78),
-rgba(30,41,59,.70)
+rgba(17,24,39,.82),
+rgba(30,41,59,.72)
 );
 
 border:1px solid rgba(255,255,255,.08);
@@ -25,11 +25,13 @@ box-shadow:
 
 text-align:center;
 
-margin-bottom:70px;
+margin-bottom:clamp(35px,6vw,70px);
 
 isolation:isolate;
 
 }
+
+/* ---------------- Glow ---------------- */
 
 .hero::before{
 
@@ -37,23 +39,24 @@ content:"";
 
 position:absolute;
 
-width:600px;
+width:650px;
 
-height:600px;
+height:650px;
 
-left:-220px;
+left:-260px;
 
-top:-220px;
+top:-260px;
 
 background:
+radial-gradient(
+circle,
+rgba(124,58,237,.28),
+transparent 72%
+);
 
-radial-gradient(circle,
-rgba(124,58,237,.30),
-transparent 70%);
+filter:blur(70px);
 
-filter:blur(60px);
-
-animation:heroGlowOne 18s ease-in-out infinite;
+animation:heroGlowOne 18s infinite ease-in-out;
 
 z-index:-1;
 
@@ -65,27 +68,30 @@ content:"";
 
 position:absolute;
 
-width:500px;
+width:520px;
 
-height:500px;
+height:520px;
 
 right:-180px;
 
-bottom:-200px;
+bottom:-220px;
 
 background:
-
-radial-gradient(circle,
+radial-gradient(
+circle,
 rgba(79,70,229,.22),
-transparent 70%);
+transparent 72%
+);
 
-filter:blur(60px);
+filter:blur(70px);
 
-animation:heroGlowTwo 22s ease-in-out infinite;
+animation:heroGlowTwo 22s infinite ease-in-out;
 
 z-index:-1;
 
 }
+
+/* ---------------- Badge ---------------- */
 
 .hero-badge{
 
@@ -103,15 +109,15 @@ background:rgba(255,255,255,.06);
 
 border:1px solid rgba(255,255,255,.08);
 
-color:#d6d6ff;
+backdrop-filter:blur(12px);
 
-font-size:.92rem;
+font-size:clamp(.82rem,.95vw,.95rem);
 
 font-weight:600;
 
-margin-bottom:28px;
+color:#dbe4ff;
 
-backdrop-filter:blur(14px);
+margin-bottom:28px;
 
 }
 
@@ -131,68 +137,87 @@ animation:pulse 2s infinite;
 
 }
 
+/* ---------------- Heading ---------------- */
+
 .hero h1{
 
-font-size:3.8rem;
+font-size:clamp(2.2rem,6vw,4rem);
+
+line-height:1.08;
 
 font-weight:900;
 
-line-height:1.1;
+letter-spacing:-1.5px;
 
-margin-bottom:12px;
-
-letter-spacing:-2px;
+margin-bottom:14px;
 
 color:white;
+
+word-break:break-word;
 
 }
 
 .hero h1 span{
 
-background:linear-gradient(
+background:
+
+linear-gradient(
+
 90deg,
-#ffffff,
-#b794ff,
+
+white,
+
+#d5b8ff,
+
 #7c3aed
+
 );
 
-background-clip:text;
-
 -webkit-background-clip:text;
+
+background-clip:text;
 
 -webkit-text-fill-color:transparent;
 
 }
 
+/* ---------------- ORCA ---------------- */
+
 .hero h2{
 
-font-size:6rem;
+font-size:clamp(2.6rem,10vw,6rem);
 
 font-weight:900;
 
-letter-spacing:12px;
+letter-spacing:clamp(4px,1vw,12px);
 
-margin:15px 0;
+margin:18px 0;
 
 color:rgba(255,255,255,.06);
 
 user-select:none;
 
+line-height:1;
+
 }
+
+/* ---------------- Subtitle ---------------- */
 
 .hero p{
 
 max-width:760px;
 
-margin:0 auto;
+margin:auto;
 
-font-size:1.08rem;
+font-size:clamp(.95rem,1.2vw,1.08rem);
 
 line-height:1.9;
 
-color:#b8bdd8;
+color:#b9c2dc;
 
 }
+
+/* ---------------- Tags ---------------- */
 
 .hero-tags{
 
@@ -200,11 +225,11 @@ display:flex;
 
 justify-content:center;
 
-gap:18px;
-
 flex-wrap:wrap;
 
-margin-top:45px;
+gap:16px;
+
+margin-top:42px;
 
 }
 
@@ -214,9 +239,13 @@ display:flex;
 
 align-items:center;
 
+justify-content:center;
+
 gap:10px;
 
-padding:14px 22px;
+padding:14px 20px;
+
+min-width:180px;
 
 border-radius:18px;
 
@@ -224,7 +253,7 @@ background:rgba(255,255,255,.05);
 
 border:1px solid rgba(255,255,255,.08);
 
-color:#d7dcff;
+color:#d8ddff;
 
 font-weight:600;
 
@@ -236,13 +265,75 @@ transition:.35s;
 
 transform:translateY(-5px);
 
+background:rgba(124,58,237,.14);
+
 border-color:#7c3aed;
 
-background:rgba(124,58,237,.16);
+box-shadow:
 
-box-shadow:0 10px 25px rgba(124,58,237,.20);
+0 10px 25px rgba(124,58,237,.20);
 
 }
+
+/* ---------------- Mobile ---------------- */
+
+@media(max-width:768px){
+
+.hero{
+
+border-radius:22px;
+
+}
+
+.hero-tags{
+
+gap:12px;
+
+}
+
+.hero-tag{
+
+width:100%;
+
+min-width:unset;
+
+}
+
+.hero p{
+
+line-height:1.7;
+
+}
+
+}
+
+/* ---------------- Small Phones ---------------- */
+
+@media(max-width:420px){
+
+.hero{
+
+padding:40px 18px;
+
+}
+
+.hero h2{
+
+display:none;
+
+}
+
+.hero-badge{
+
+width:100%;
+
+justify-content:center;
+
+}
+
+}
+
+/* ---------------- Animation ---------------- */
 
 @keyframes pulse{
 
@@ -256,9 +347,9 @@ opacity:1;
 
 50%{
 
-transform:scale(1.4);
+transform:scale(1.35);
 
-opacity:.6;
+opacity:.55;
 
 }
 
@@ -304,57 +395,13 @@ transform:translate(0,0);
 
 50%{
 
-transform:translate(-70px,50px);
+transform:translate(-70px,60px);
 
 }
 
 100%{
 
 transform:translate(0,0);
-
-}
-
-}
-
-@media(max-width:900px){
-
-.hero{
-
-padding:70px 30px;
-
-}
-
-.hero h1{
-
-font-size:2.7rem;
-
-}
-
-.hero h2{
-
-font-size:4rem;
-
-letter-spacing:6px;
-
-}
-
-.hero p{
-
-font-size:1rem;
-
-}
-
-.hero-tags{
-
-gap:12px;
-
-}
-
-.hero-tag{
-
-width:100%;
-
-justify-content:center;
 
 }
 

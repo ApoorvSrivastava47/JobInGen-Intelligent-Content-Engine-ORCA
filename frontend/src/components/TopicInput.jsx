@@ -2,14 +2,24 @@ import { useState } from "react";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 
 import "../styles/TopicInput.css";
-
 import { generateContent } from "../services/api";
 
 function TopicInput({ onGenerate }) {
 
   const [topic, setTopic] = useState("");
   const [platform, setPlatform] = useState("linkedin");
+
   const [loading, setLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState("");
+  const [progress, setProgress] = useState(0);
+
+  const loadingStages = [
+    "🧠 Planner Agent is building strategy...",
+    "✍ AI Copywriter is writing content...",
+    "🔍 Critic Agent is reviewing quality...",
+    "🎨 Generating AI Image...",
+    "✅ Finalizing Results..."
+  ];
 
   async function handleGenerate() {
 
@@ -19,19 +29,33 @@ function TopicInput({ onGenerate }) {
     }
 
     setLoading(true);
+    setProgress(0);
+
+    let stage = 0;
+
+    setLoadingText(loadingStages[0]);
+
+    const interval = setInterval(() => {
+
+      stage++;
+
+      if (stage < loadingStages.length) {
+
+        setLoadingText(loadingStages[stage]);
+        setProgress((stage + 1) * 20);
+
+      }
+
+    }, 1000);
 
     try {
 
       const result = await generateContent(
         topic,
-        platform,
+        platform
       );
 
-      // 👇 DEBUG
-      console.log("========== BACKEND RESPONSE ==========");
-      console.log(result);
-      console.log("Image Path:", result.image_path);
-      console.log("======================================");
+      setProgress(100);
 
       onGenerate(result);
 
@@ -42,7 +66,15 @@ function TopicInput({ onGenerate }) {
 
     } finally {
 
-      setLoading(false);
+      clearInterval(interval);
+
+      setTimeout(() => {
+
+        setLoading(false);
+        setLoadingText("");
+        setProgress(0);
+
+      }, 500);
 
     }
 
@@ -60,40 +92,30 @@ function TopicInput({ onGenerate }) {
 
     <section className="topic-section">
 
-      <div
-        style={{
-          display: "flex",
-          gap: "12px",
-          marginBottom: "16px",
-        }}
-      >
+      <div className="platform-selector">
 
-        <div className="platform-selector">
+        {[
+          ["linkedin", "LinkedIn"],
+          ["instagram", "Instagram"],
+          ["twitter", "X"],
+          ["facebook", "Facebook"],
+          ["blog", "Blog"],
+        ].map(([value, label]) => (
 
-          {[
-            ["linkedin", "LinkedIn"],
-            ["instagram", "Instagram"],
-            ["twitter", "X"],
-            ["facebook", "Facebook"],
-            ["blog", "Blog"],
-          ].map(([value, label]) => (
+          <button
+            key={value}
+            type="button"
+            className={
+              platform === value
+                ? "platform-pill active"
+                : "platform-pill"
+            }
+            onClick={() => setPlatform(value)}
+          >
+            {label}
+          </button>
 
-            <button
-              key={value}
-              type="button"
-              className={
-                platform === value
-                  ? "platform-pill active"
-                  : "platform-pill"
-              }
-              onClick={() => setPlatform(value)}
-            >
-              {label}
-            </button>
-
-          ))}
-
-        </div>
+        ))}
 
       </div>
 
@@ -117,10 +139,39 @@ function TopicInput({ onGenerate }) {
           onClick={handleGenerate}
           disabled={loading}
         >
-          {loading ? "Generating..." : "Generate"}
+          {loading ? loadingText : "🚀 Generate"}
         </button>
 
       </div>
+
+      {
+
+        loading && (
+
+          <div className="loading-wrapper">
+
+            <div className="loading-bar">
+
+              <div
+                className="loading-fill"
+                style={{
+                  width: `${progress}%`
+                }}
+              />
+
+            </div>
+
+            <p className="loading-stage">
+
+              {loadingText}
+
+            </p>
+
+          </div>
+
+        )
+
+      }
 
     </section>
 

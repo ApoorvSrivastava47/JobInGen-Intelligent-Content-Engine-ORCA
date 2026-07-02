@@ -1,13 +1,85 @@
+/* ---------- Global Layout ---------- */
+
+*,
+*::before,
+*::after{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+html,
+body{
+    width:100%;
+    overflow-x:hidden;
+}
+
+body{
+    margin:0;
+    min-width:320px;
+}
+
+/* ---------- Main Container ---------- */
+
 .layout{
 
-width:min(1400px,94%);
+    width:min(100%,1400px);
 
-margin:auto;
+    margin:auto;
 
-padding:40px 0 80px;
+    padding:
+        clamp(18px,3vw,42px);
 
-position:relative;
+}
 
-z-index:2;
+/* ---------- Large Desktop ---------- */
+
+@media(min-width:1700px){
+
+.layout{
+
+    width:min(92%,1550px);
+
+}
+
+}
+
+/* ---------- Tablet ---------- */
+
+@media(max-width:1024px){
+
+.layout{
+
+    width:100%;
+
+    padding:28px;
+
+}
+
+}
+
+/* ---------- Mobile ---------- */
+
+@media(max-width:768px){
+
+.layout{
+
+    padding:18px;
+
+}
+
+}
+
+/* ---------- Small Phones ---------- */
+
+@media(max-width:420px){
+
+.layout{
+
+    padding:14px;
+
+}
 
 }

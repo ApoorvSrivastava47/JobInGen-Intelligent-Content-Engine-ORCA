@@ -16,33 +16,33 @@ function WorkflowStatus({ result }) {
   const steps = [
 
     {
-      icon: <FaBrain />,
-      title: "Planner Agent",
-      status: "Completed",
+      icon:<FaBrain/>,
+      title:"Planner Agent",
+      description:"Strategy Generated",
     },
 
     {
-      icon: <FaPenNib />,
-      title: "Copywriter Agent",
-      status: "Completed",
+      icon:<FaPenNib/>,
+      title:"Copywriter Agent",
+      description:"Content Written",
     },
 
     {
-      icon: <FaSearch />,
-      title: "Critic Agent",
-      status: "Completed",
+      icon:<FaSearch/>,
+      title:"Critic Agent",
+      description:"Quality Checked",
     },
 
     {
-      icon: <FaRobot />,
-      title: "Image Prompt Agent",
-      status: "Completed",
+      icon:<FaRobot/>,
+      title:"Image Prompt Agent",
+      description:"Prompt Created",
     },
 
     {
-      icon: <FaImage />,
-      title: "Image Generator",
-      status: "Completed",
+      icon:<FaImage/>,
+      title:"Image Generator",
+      description:"Image Generated",
     },
 
   ];
@@ -51,34 +51,51 @@ function WorkflowStatus({ result }) {
 
     <section className="workflow-card">
 
-      <h2>Workflow Status</h2>
+      <h2>
+
+        AI Workflow
+
+      </h2>
 
       {
 
-        steps.map((step) => (
+        steps.map((step,index)=>(
 
           <div
             className="workflow-item"
             key={step.title}
+            style={{
+              animationDelay:`${index*0.18}s`
+            }}
           >
 
             <div className="workflow-left">
 
               {step.icon}
 
-              <span>
+              <div>
 
-                {step.title}
+                <strong>
 
-              </span>
+                  {step.title}
+
+                </strong>
+
+                <small>
+
+                  {step.description}
+
+                </small>
+
+              </div>
 
             </div>
 
             <div className="workflow-right">
 
-              <FaCheckCircle />
+              <FaCheckCircle/>
 
-              {step.status}
+              Completed
 
             </div>
 
