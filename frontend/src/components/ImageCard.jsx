@@ -10,7 +10,9 @@ function ImageCard({ imageUrl }) {
 
   if (!imageUrl) return null;
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL =
+  import.meta.env.VITE_API_URL ||
+  "https://jobingen-intelligent-content-engine-orca-production-ddfc.up.railway.app";
 
   const fullImageUrl = `${API_URL}${imageUrl}`;
 
