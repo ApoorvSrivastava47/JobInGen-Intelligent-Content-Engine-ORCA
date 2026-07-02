@@ -23,7 +23,7 @@ class ContentWorkflow:
 
         self.image_service = ImageService()
 
-        self.max_revisions = 2
+        self.max_revisions = 1
 
     def execute(
         self,

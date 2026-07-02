@@ -23,6 +23,7 @@ class GroqClient(BaseAIClient):
         response = self.client.chat.completions.create(
             model=self.model,
             temperature=temperature,
+            max_tokens=700,
             messages=[
                 {
                     "role": "system",
