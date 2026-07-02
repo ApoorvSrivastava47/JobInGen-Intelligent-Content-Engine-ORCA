@@ -10,10 +10,16 @@ function ImageCard({ imagePath }) {
 
   if (!imagePath) return null;
 
-  const filename = imagePath.split("/").pop();
+  // Railway Backend URL
+  const API_URL = import.meta.env.VITE_API_URL;
 
-  const imageUrl = `http://127.0.0.1:8000/images/${imagePath}`;
-  
+  // Remove starting slash if present
+  const cleanPath = imagePath.replace(/^\/+/, "");
+
+  const imageUrl = `${API_URL}/${cleanPath}`;
+
+  const filename = cleanPath.split("/").pop();
+
   function downloadImage() {
 
     const a = document.createElement("a");
@@ -45,13 +51,9 @@ function ImageCard({ imagePath }) {
       <div className="image-preview">
 
         <img
-
           src={imageUrl}
-
           alt="Generated"
-
           className="generated-image"
-
         />
 
       </div>
@@ -59,11 +61,8 @@ function ImageCard({ imagePath }) {
       <div className="image-actions">
 
         <button
-
           className="primary-btn"
-
           onClick={downloadImage}
-
         >
 
           <FaDownload />
@@ -73,15 +72,10 @@ function ImageCard({ imagePath }) {
         </button>
 
         <a
-
           href={imageUrl}
-
           target="_blank"
-
           rel="noreferrer"
-
           className="secondary-btn"
-
         >
 
           <FaExpand />
@@ -97,6 +91,5 @@ function ImageCard({ imagePath }) {
   );
 
 }
-
 
 export default ImageCard;
