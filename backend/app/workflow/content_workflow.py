@@ -77,10 +77,13 @@ class ContentWorkflow:
             filename="generated_post.png",
         )
 
+        image_filename = image_path.split("/")[-1]
+
         return {
             "strategy": strategy,
             "content": content,
             "review": review,
             "image_prompt": image_prompt,
             "image_path": image_path,
+            "image_url": f"/images/{image_filename}",
         }
