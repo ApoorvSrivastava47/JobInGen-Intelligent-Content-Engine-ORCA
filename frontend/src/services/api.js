@@ -1,8 +1,8 @@
 const API_URL =
-  import.meta.env.VITE_API_URL ??
   "https://jobingen-intelligent-content-engine-orca-production-ddfc.up.railway.app";
 
 export async function generateContent(topic, platform) {
+
   const response = await fetch(`${API_URL}/generate`, {
     method: "POST",
     headers: {
@@ -15,7 +15,7 @@ export async function generateContent(topic, platform) {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to generate content");
+    throw new Error(`HTTP ${response.status}`);
   }
 
   return await response.json();
