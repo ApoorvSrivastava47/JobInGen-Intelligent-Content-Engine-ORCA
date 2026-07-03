@@ -11,22 +11,22 @@ function ImageCard({ imageUrl }) {
   if (!imageUrl) return null;
 
   const API_URL =
-  import.meta.env.VITE_API_URL ||
-  "https://jobingen-intelligent-content-engine-orca-production-ddfc.up.railway.app";
+    import.meta.env.VITE_API_URL ||
+    "https://jobingen-intelligent-content-engine-orca-production-ddfc.up.railway.app";
 
   const fullImageUrl = `${API_URL}${imageUrl}`;
+
+  console.log("========== IMAGE DEBUG ==========");
+  console.log("API_URL:", API_URL);
+  console.log("imageUrl:", imageUrl);
+  console.log("fullImageUrl:", fullImageUrl);
+  console.log("===============================");
 
   const filename = imageUrl.split("/").pop();
 
   function downloadImage() {
 
-    const a = document.createElement("a");
-
-    a.href = fullImageUrl;
-
-    a.download = filename;
-
-    a.click();
+    window.open(fullImageUrl, "_blank");
 
   }
 
@@ -48,16 +48,16 @@ function ImageCard({ imageUrl }) {
 
       <div className="image-preview">
 
-   <img
-  src={fullImageUrl}
-  alt="Generated"
-  className="generated-image"
-  onLoad={() => console.log("✅ Image Loaded")}
-  onError={(e) => {
-    console.log("❌ Image Failed");
-    console.log(e.currentTarget.src);
-  }}
-/>
+        <img
+          src={fullImageUrl}
+          alt="Generated"
+          className="generated-image"
+          onLoad={() => console.log("✅ Image Loaded")}
+          onError={(e) => {
+            console.error("❌ Image Failed");
+            console.error("Requested URL:", e.currentTarget.src);
+          }}
+        />
 
       </div>
 
@@ -92,9 +92,6 @@ function ImageCard({ imageUrl }) {
     </section>
 
   );
-  console.log("API_URL =", API_URL);
-  console.log("imageUrl =", imageUrl);
-  console.log("fullImageUrl =", fullImageUrl);
 
 }
 
