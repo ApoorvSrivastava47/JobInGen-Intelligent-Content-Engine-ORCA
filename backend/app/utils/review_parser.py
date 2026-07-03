@@ -13,5 +13,4 @@ class ReviewParser:
     ) -> bool:
 
         review = review.lower()
-
         return any(keyword in review for keyword in self.REWRITE_KEYWORDS)
