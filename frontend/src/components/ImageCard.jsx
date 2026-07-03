@@ -87,6 +87,9 @@ function ImageCard({ imageUrl }) {
     </section>
 
   );
+  console.log("API_URL =", API_URL);
+  console.log("imageUrl =", imageUrl);
+  console.log("fullImageUrl =", fullImageUrl);
 
 }
 
