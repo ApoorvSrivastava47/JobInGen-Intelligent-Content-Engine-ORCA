@@ -48,11 +48,16 @@ function ImageCard({ imageUrl }) {
 
       <div className="image-preview">
 
-        <img
-          src={fullImageUrl}
-          alt="Generated"
-          className="generated-image"
-        />
+   <img
+  src={fullImageUrl}
+  alt="Generated"
+  className="generated-image"
+  onLoad={() => console.log("✅ Image Loaded")}
+  onError={(e) => {
+    console.log("❌ Image Failed");
+    console.log(e.currentTarget.src);
+  }}
+/>
 
       </div>
 
