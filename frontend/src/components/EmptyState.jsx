@@ -93,9 +93,6 @@ function EmptyState() {
       </div>
 
     </section>
-
   );
-
 }
-
 export default EmptyState;
